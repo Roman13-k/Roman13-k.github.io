@@ -98,6 +98,11 @@ span {
     transition: width 0.1s ease;
 }
 
+button, img {
+    outline: none; 
+    -webkit-tap-highlight-color: transparent; 
+  }
+  
 .cliker__button {
     width: 50%;
     height: 30%;
