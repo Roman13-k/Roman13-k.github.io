@@ -110,6 +110,7 @@ button, img {
     padding: 0;
     cursor: pointer;
     background: none;
+    touch-action: manipulation;
 }
 
 .cliker__button:active {
