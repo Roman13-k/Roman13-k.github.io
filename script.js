@@ -1,10 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
   const counter = document.getElementById("counter");
   const incrementButton = document.getElementById("increment");
+  const animationContainer = document.getElementById("animation-container");
   let rez = 0;
   let cout = 1;
 
-  incrementButton.addEventListener("click", () => {
+  incrementButton.addEventListener("click", (e) => {
+    const numberElement = document.createElement("div");
+    numberElement.textContent = "+" + cout;
+    numberElement.classList.add("cliker__number");
+
+    const rect = animationContainer.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    numberElement.style.left = `${x}px`;
+    numberElement.style.top = `${y}px`;
+
+    animationContainer.appendChild(numberElement);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        numberElement.classList.add("hidden");
+      });
+    });
+
+    setTimeout(() => {
+      animationContainer.removeChild(numberElement);
+    }, 1000);
+
     rez += cout;
     if (rez < 5e5) counter.textContent = rez;
     else counter.textContent = (rez / 1e6).toFixed(2) + "млн.";
@@ -67,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   jobButton.addEventListener("click", () => {
     let curentIndex = mBusiness.findIndex(
-      (item) => item.monkey === job.textContent
+      (item) => item.monkey === job.textContent,
     );
     console.log(curentIndex);
 
@@ -99,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const progressBar = document.getElementById("bar");
   const img = document.getElementById("monkey");
   const buttons = document.querySelectorAll(
-    ".cliker__button, .cliker__upper, .job__button"
+    ".cliker__button, .cliker__upper, .job__button",
   );
   const stages = [
     { threshold: 500e6, image: "monkey7.png", final: 1e9 },
